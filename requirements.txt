@@ -1,0 +1,12 @@
+# --- Core ---
+pymssql>=2.2.11            # SQL Server (Phase 2)
+
+# --- Phase 3 — Voice (free, no API keys) ---
+edge-tts>=6.1.12           # Text-to-speech, neural voices
+SpeechRecognition>=3.10    # Speech-to-text (Google free recognizer)
+sounddevice>=0.4.6         # Microphone + speaker playback
+miniaudio>=2.2.0           # MP3 decode
+numpy>=1.26.0              # Audio buffer handling
+
+# --- Phase 4 (later) ---
+# fastapi + uvicorn        # small server so the Android app can call the Brain

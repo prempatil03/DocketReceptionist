@@ -1,0 +1,1 @@
+"""Docket Receptionist — configuration package."""

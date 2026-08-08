@@ -1,0 +1,11 @@
+docket_number,status,location,origin,destination
+234587,out for delivery,Mumbai hub,MNS,DHRT
+100234,Held at hub,Mumbai hub,MNS,PUN
+456789,In transit,Delhi sort center,MNS,DLH
+112233,Delivered,Surat office,MNS,SRT
+998877,Out for delivery,Nagpur hub,MNS,NGP
+555011,In transit,Bengaluru hub,MNS,BLR
+778899,Delivered,Jaipur office,MNS,JP
+342110,Held at hub,Hyderabad hub,MNS,HYD
+609844,Out for delivery,Indore hub,MNS,IDR
+120999,In transit,Pune sort center,MNS,PUN
