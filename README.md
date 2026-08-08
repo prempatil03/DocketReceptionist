@@ -1,5 +1,10 @@
 # 📞 Docket Receptionist
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](requirements.txt)
+[![Phases](https://img.shields.io/badge/phases-1--3%20ready-brightgreen.svg)](PROJECT_LOG.md)
+[![Security](https://img.shields.io/badge/guardrails-on-success.svg)](SECURITY.md)
+
 An **AI phone receptionist** for courier & logistics. A customer asks
 *"where is my parcel?"* — the AI takes the docket number, looks it up
 **read-only**, and answers **out loud in their language**. Hard-guarded so it
@@ -136,3 +141,7 @@ Real server, password, and stored-procedure name stay in local `.env` only
 5. **Never commit `.env`.**  
 
 Full policy: [SECURITY.md](SECURITY.md) · Progress: [PROJECT_LOG.md](PROJECT_LOG.md)
+
+## License
+
+MIT — see [LICENSE](LICENSE).
