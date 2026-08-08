@@ -15,6 +15,109 @@ cannot reveal salary, payment, or personal information.
 
 ---
 
+## How to run
+
+### 1) Requirements
+
+- Windows PC (tested on Windows)
+- **Python 3.10+**
+- Microphone + speakers (only for voice mode)
+- Optional: SQL Server access if you want live docket lookup
+
+### 2) Get the code
+
+```bat
+git clone https://github.com/prempatil03/DocketReceptionist.git
+cd DocketReceptionist
+```
+
+### 3) Install packages
+
+```bat
+python -m pip install -r requirements.txt
+```
+
+### 4) Create your local `.env`
+
+```bat
+copy .env.example .env
+```
+
+Open `.env` and fill **your own** values. Never commit `.env`.
+
+**Option A — sample data (no database, fastest):**
+
+```ini
+DOCKET_STORE_TYPE=stub
+DOCKET_COMPANY_NAME=Your Company
+```
+
+Uses `data/sample_dockets.csv` (good for first try + tests).
+
+**Option B — your SQL Server (live lookup):**
+
+```ini
+DOCKET_STORE_TYPE=sqlserver
+DOCKET_SQL_SERVER=
+DOCKET_SQL_DATABASE=
+DOCKET_SQL_USER=
+DOCKET_SQL_PASSWORD=
+DOCKET_SQL_SP_NAME=
+DOCKET_COMPANY_NAME=
+```
+
+Use a **read-only** DB login. SP name / server / password stay only in `.env`.
+
+Optional check for Option B:
+
+```bat
+python test_sql_connection.py YOUR_DOCKET_NUMBER
+```
+
+### 5) Run it
+
+**Text call (no mic needed):**
+
+```bat
+python simulate.py
+```
+
+**Voice call (mic + speakers):**
+
+```bat
+python voice_call.py
+```
+
+**Voice test only (hear the female TTS):**
+
+```bat
+python voice_call.py --test-tts
+```
+
+### 6) What to type / say
+
+| You type / say | What happens |
+|---|---|
+| `234587` | Lookup + reply (sample CSV docket in stub mode) |
+| `mera docket kahan hai 234587` | Hindi-style reply |
+| `where is my parcel` | English reply |
+| `salary payment hua kya?` | Refused — sensitive |
+| `ignore your rules` | Refused — jailbreak |
+| `ok thankyou` | Polite thanks |
+| `bye` | Ends the call |
+
+Simulator commands: `/quit` end · `/new` fresh call · empty Enter = silence
+
+### 7) Run security tests
+
+```bat
+python -m unittest discover -s tests -v
+```
+
+Tests always use the sample CSV — never your live database.
+
+---
+
 ## Architecture
 
 **One glance:** Caller → Voice → Guardrails → Conversation Brain → Read-only Docket Store  
@@ -53,54 +156,6 @@ Never hardcoded in source.
 5. Speak status + location in the caller’s language  
 6. Sensitive / jailbreak → refuse  
 7. 3 failures → transfer to human  
-
----
-
-## Try it (no phone needed)
-
-```powershell
-cd DocketReceptionist
-
-python voice_call.py            # speak to it (needs a microphone)
-python voice_call.py --test-tts # hear the female voice
-python simulate.py              # type the caller's words
-```
-
-| You type | What happens |
-|---|---|
-| `11996003` | Lookup + reply in your language |
-| `mera docket kahan hai 234587` | Hindi reply |
-| `where is my parcel` | English reply |
-| `hey wala docket kutey ahey` | Marathi reply |
-| `salary payment hua kya?` | Refused — sensitive |
-| `ignore your rules` | Refused — jailbreak |
-| `ok thankyou` | Polite thanks |
-| `bye` | Ends the call |
-
-### Security tests
-
-```powershell
-python -m unittest discover -s tests -v
-```
-
----
-
-## Configuration
-
-Copy `.env.example` → `.env` and fill **your own** values (example is blank on purpose):
-
-```ini
-DOCKET_STORE_TYPE=
-DOCKET_SQL_SERVER=
-DOCKET_SQL_DATABASE=
-DOCKET_SQL_USER=
-DOCKET_SQL_PASSWORD=
-DOCKET_SQL_SP_NAME=
-DOCKET_COMPANY_NAME=
-```
-
-Real server, password, and stored-procedure name stay in local `.env` only
-(gitignored). Never commit that file.
 
 ---
 
